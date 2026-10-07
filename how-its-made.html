@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How it's made | The Graphite Mind</title>
+  <meta name="description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <link rel="canonical" href="https://thegraphitemind.com/how-its-made.html">
+  <meta name="theme-color" content="#F3EEE3">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/brand/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/img/brand/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/brand/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Graphite Mind">
+  <meta property="og:title" content="How it&#x27;s made | The Graphite Mind">
+  <meta property="og:description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <meta property="og:url" content="https://thegraphitemind.com/how-its-made.html">
+  <meta property="og:image" content="https://thegraphitemind.com/assets/img/brand/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Graphite Mind wordmark with Zee and the cast on ivory paper: Big questions, drawn in code.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How it&#x27;s made | The Graphite Mind">
+  <meta name="twitter:description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <meta name="twitter:image" content="https://thegraphitemind.com/assets/img/brand/og-image.jpg">
+  <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/img/brand/wordmark.svg" width="900" height="200" alt="The Graphite Mind, home"></a>
+    <nav class="nav-desktop" aria-label="Main">
+      <a class="nav-link" href="/#videos">Videos</a>
+      <a class="nav-link" href="/cast.html">Cast</a>
+      <a class="nav-link" href="/how-its-made.html" aria-current="page">How it’s made</a>
+      <a class="nav-link" href="/about.html">About</a>
+      <a class="btn btn--ink btn--small" href="https://www.youtube.com/@TheGraphiteMind?sub_confirmation=1"><svg viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 1.2 11 7 1 12.8z" fill="currentColor"/></svg> Subscribe</a>
+    </nav>
+    <details class="menu">
+      <summary>Menu</summary>
+      <nav class="menu-panel" aria-label="Menu">
+        <a class="nav-link" href="/#videos">Videos</a>
+        <a class="nav-link" href="/cast.html">Cast</a>
+        <a class="nav-link" href="/how-its-made.html" aria-current="page">How it’s made</a>
+        <a class="nav-link" href="/about.html">About</a>
+        <a class="btn btn--ink " href="https://www.youtube.com/@TheGraphiteMind?sub_confirmation=1"><svg viewBox="0 0 12 14" aria-hidden="true" focusable="false"><path d="M1 1.2 11 7 1 12.8z" fill="currentColor"/></svg> Subscribe</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<main id="main">
+<div class="wrap page-head">
+  <h1>How a video gets made.</h1>
+  <p class="lead">Short version: a person decides what to make, Claude Code writes the script and the code that draws every frame, and a MacBook renders it. Long version below, with the parts that are not code listed too.</p>
+</div>
+
+<section class="section section--tight-top" aria-labelledby="h-pipeline">
+  <div class="wrap">
+    <div class="split">
+      <div class="split__head"><h2 id="h-pipeline">Five stages, one at a time.</h2></div>
+      <div class="split__body"><p>Each long video goes through the same five stages. Each stage is its own Claude Code session, started by hand. Nothing moves on by itself.</p></div>
+    </div>
+    <ol class="pipeline">
+      <li>
+        <div class="p-head"><h3>Research and script</h3></div>
+        <dl>
+          <dt>What happens</dt>
+          <dd>Claude researches the topic and writes down each claim with its source and how sure we can be. Then it argues with its own draft from several seats: fact-checker, American viewer, animator, skeptical teacher. The script ends up as a table: each spoken sentence, the picture that goes with it, and a note on how it should sound.</dd>
+          <dt>Tools</dt>
+          <dd>Claude Code running Claude Opus. No code yet.</dd>
+          <dt>What the human does</dt>
+          <dd>Picks the topic, starts the session, reads the script.</dd>
+        </dl>
+      </li>
+      <li>
+        <div class="p-head"><h3>Code the video, with a stand-in voice</h3></div>
+        <dl>
+          <dt>What happens</dt>
+          <dd>Claude writes Python that draws every scene: characters, props, backgrounds, maps, charts, transitions. A shared engine and a library of drawings supply the parts, so Zee, the kitchen and the world map are reused, not redrawn. Timing comes from a stand-in voice, the text-to-speech built into macOS. Claude renders preview frames and looks at every scene. Two checkers then scan the layout: one finds covered text or text on a busy background, the other finds text drawn over pictures.</dd>
+          <dt>Tools</dt>
+          <dd>Claude Code running Claude Sonnet. The hardest scenes (maps, animated charts, many layers) get the same session switched to maximum effort. Python with Pillow and NumPy draws the frames, and ffmpeg assembles them.</dd>
+          <dt>What the human does</dt>
+          <dd>Starts the stage. On newer videos, also approves the rough cut with the stand-in voice before any paid voice is made.</dd>
+        </dl>
+      </li>
+      <li>
+        <div class="p-head"><h3>Voices</h3></div>
+        <dl>
+          <dt>What happens</dt>
+          <dd>Each sentence gets its own take, with delivery tags taken from the script&rsquo;s tone notes. Hard names are spelled out phonetically. Then the scenes are re-timed to the real voice, because real takes run longer or shorter than the stand-in.</dd>
+          <dt>Tools</dt>
+          <dd>ElevenLabs text-to-speech, called from Claude Code. The narrator is Max and Zee has a separate voice. They are AI voices.</dd>
+          <dt>What the human does</dt>
+          <dd>Starts the stage. Claude tries three to five sentences first to settle the voice and the delivery, then does the rest.</dd>
+        </dl>
+      </li>
+      <li>
+        <div class="p-head"><h3>Subtitles, titles and thumbnails</h3></div>
+        <dl>
+          <dt>What happens</dt>
+          <dd>Subtitles are translated sentence by sentence into at least eight more languages and cut into short one-line cues. Claude writes at least five title options and builds at least five thumbnails, each from a different angle on the story, and checks that they still read at 320 pixels wide. Chapter marks in the description come from the timing file.</dd>
+          <dt>Tools</dt>
+          <dd>Claude Code: Sonnet for subtitles, Opus for thumbnails and translation. Thumbnails are drawn with the same character code as the video.</dd>
+          <dt>What the human does</dt>
+          <dd>Picks the title and the thumbnail.</dd>
+        </dl>
+      </li>
+      <li>
+        <div class="p-head"><h3>Render and review</h3></div>
+        <dl>
+          <dt>What happens</dt>
+          <dd>The final render only starts when the human says &ldquo;render video&rdquo;. Then a fresh Claude session, one that did not build the video, checks a frame about every three seconds and measures the loudness of every spoken line. Each line is balanced, then the whole track is normalized to &minus;14 LUFS with a limiter.</dd>
+          <dt>Tools</dt>
+          <dd>Claude Code running Claude Opus, in a new session so the reviewer is not the builder. Renders go through a queue, one at a time, on a MacBook Air with 8 GB of RAM.</dd>
+          <dt>What the human does</dt>
+          <dd>Gives the render command, watches the finished video, reports small visual glitches, and uploads it to YouTube.</dd>
+        </dl>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section band-ink on-ink" aria-labelledby="h-compare">
+  <div class="wrap">
+    <h2 id="h-compare">Zee, twice.</h2>
+    <p style="margin-top:1rem">Same Zee, two ways: the code, and the drawing it makes. The code is copied from the engine file.</p>
+    <div class="compare">
+      <figure>
+        <pre class="code-block" tabindex="0" role="region" aria-label="Python code that draws Zee’s eyes, brows and mouth"><code><span class="tk-c"># the-graphite-mind/longform/engine/cast.py, lines 299-321</span>
+<span class="tk-c"># (inside figure(): eyes, brows, cheeks and mouth; lines 309-310 left out)</span>
+    ex = r * <span class="tk-n">0.36</span>
+    ey = cy - r * <span class="tk-n">0.02</span>
+    closed = blink <span class="tk-k">or</span> mood == <span class="tk-s">"sleepy"</span>
+    <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
+        ecx = cx + side * ex + look[<span class="tk-n">0</span>]
+        ecy = ey + look[<span class="tk-n">1</span>]
+        <span class="tk-k">if</span> closed:
+            d.line(catmull([(ecx - <span class="tk-n">10</span>, ecy), (ecx, ecy + <span class="tk-n">6</span>), (ecx + <span class="tk-n">10</span>, ecy)], <span class="tk-n">5</span>), LW)
+        <span class="tk-k">else</span>:
+            ry = <span class="tk-n">14</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">17</span>
+            <span class="tk-c"># ...</span>
+            d.ellipse(ecx, ecy, <span class="tk-n">9</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">11</span>, ry, INK, outline=<span class="tk-k">False</span>)
+            d.dot((ecx - <span class="tk-n">3</span>, ecy - <span class="tk-n">5</span>), <span class="tk-n">3.4</span>, C[<span class="tk-s">"white"</span>])
+        bp = BROWS.get(mood, BROWS[<span class="tk-s">"neutral"</span>])
+        pts = [(ecx - side * x * <span class="tk-n">0.9</span> - look[<span class="tk-n">0</span>] * <span class="tk-n">0.3</span>, ecy + y * <span class="tk-n">0.9</span>) <span class="tk-k">for</span> x, y <span class="tk-k">in</span> bp]
+        d.line(catmull(pts, <span class="tk-n">5</span>), LW * <span class="tk-n">0.85</span>)
+    <span class="tk-k">if</span> mood <span class="tk-k">in</span> (<span class="tk-s">"happy"</span>, <span class="tk-s">"laugh"</span>, <span class="tk-s">"proud"</span>):
+        <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
+            d.ellipse(cx + side * r * <span class="tk-n">0.6</span>, cy + r * <span class="tk-n">0.3</span>, <span class="tk-n">11</span>, <span class="tk-n">7</span>, C[<span class="tk-s">"pink"</span>], outline=<span class="tk-k">False</span>)
+    <span class="tk-k">if</span> mood == <span class="tk-s">"worried"</span>:
+        d.fill(ellipse_pts(cx + r * <span class="tk-n">0.85</span>, cy - r * <span class="tk-n">0.55</span>, <span class="tk-n">6</span>, <span class="tk-n">9</span>) , C[<span class="tk-s">"sky"</span>], width=<span class="tk-n">2.5</span>)
+    _mouth(d, mood, cx, cy, r, braces=<span class="tk-s">"braces"</span> <span class="tk-k">in</span> extras)</code></pre>
+        <figcaption>From the drawing engine: how Zee&rsquo;s eyes, brows and mouth are drawn.</figcaption>
+      </figure>
+      <figure class="stage">
+        <img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, in a yellow hoodie and jeans, drawn by the code on the left." loading="lazy" decoding="async" style="max-height:24rem;width:auto">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="h-lib">
+  <div class="wrap">
+    <div class="split">
+      <div class="split__head"><h2 id="h-lib">Hundreds of drawings, none of them drawn by hand.</h2></div>
+      <div class="split__body stats-prose"><p>The shared drawing engine is 33,250 lines of Python in 83 files. 25,370 of those lines are the asset library: 314 props, 72 animals and plants, and 97 registered character designs, counting each outfit and age variant on its own.</p>
+<p>Every video also has its own scene code on top of that, so these numbers are a floor.</p>
+<p>So far we have published 8 long videos, about 2 hours, 3 minutes of them put together, and 7 Shorts. All of it is drawn by that engine.</p></div>
+    </div>
+    <figure class="kitlib">
+      <img src="/assets/img/making/kitlib-sheet.webp" width="1600" height="1104" alt="A contact sheet from our asset library showing dozens of drawn characters, props and objects, each one produced by Python code." loading="lazy" decoding="async">
+      <figcaption>A page from the asset library. Every item on it is a function that draws itself.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section band-2" aria-labelledby="h-frames">
+  <div class="wrap">
+    <div class="section-head"><h2 id="h-frames">Six frames from published videos.</h2><p>All of it comes out of the engine. No stock clips.</p></div>
+    <ul class="frames">
+<li><img src="/assets/img/making/frame-1.webp" width="1280" height="720" alt="Ruby and Leo on a stoop at night in front of a brick house, from the dating video."></li>
+<li><img src="/assets/img/making/frame-2.webp" width="1280" height="720" alt="Zee asleep in bed, a phone on the nightstand reading 7:58, from the Hawaii alert video."></li>
+<li><img src="/assets/img/making/frame-3.webp" width="1280" height="720" alt="A police officer waves traffic past buses and cars on a crowded shopping street, from the Black Friday video."></li>
+<li><img src="/assets/img/making/frame-4.webp" width="1280" height="720" alt="Zee on a beach under a red umbrella, holding sunscreen, from the sunlight video."></li>
+<li><img src="/assets/img/making/frame-5.webp" width="1280" height="720" alt="A tower and a house on a hill in Prague, 1618, with figures at a window, from the wars video."></li>
+<li><img src="/assets/img/making/frame-6.webp" width="1280" height="720" alt="Zee sitting on a bed at night, asking a chat assistant if it can actually think, from the AI history video."></li>
+</ul>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="h-human">
+  <div class="wrap">
+    <div class="two-col">
+      <div>
+        <h2 id="h-human" style="font-size:var(--step-3)">What the human does</h2>
+        <div class="prose" style="margin-top:1.25rem">
+          <p>Picks the topics. Starts each stage. On newer videos, approves the rough cut with the stand-in voice before any paid voice is made. Picks the title and the thumbnail. Gives the render command. Reviews the finished video. Uploads it.</p>
+          <p>Claude Code does the typing, the drawing code and the checking. A person decides what gets made and what gets published.</p>
+        </div>
+      </div>
+      <div>
+        <h2 style="font-size:var(--step-3)">What isn&rsquo;t code</h2>
+        <div class="prose" style="margin-top:1.25rem">
+          <ul>
+            <li>The voices are <mark>AI voices made with ElevenLabs</mark>.</li>
+            <li>World maps use Natural Earth data, which is public domain.</li>
+            <li>The fonts inside the videos (Bradley Hand and Arial Rounded) are fonts already on a Mac.</li>
+            <li>The music and sound effects are generated by code too.</li>
+          </ul>
+          <p>The Graphite Mind is an independent channel. It uses Claude Code, a tool from Anthropic, and is not sponsored or endorsed by Anthropic.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-2" aria-labelledby="h-why">
+  <div class="wrap split">
+    <div class="split__head"><h2 id="h-why">Why do it this way?</h2></div>
+    <div class="split__body prose">
+      <p>No stock footage and no borrowed art, so there is no copyright risk from the pictures. Every drawing is ours, so we can reuse it and change it.</p>
+      <p>And because the drawings are code, a character improved once can be reused as improved in the next video. Eight long videos were published this way between September 28 and October 7, 2026, all rendered on one MacBook Air.</p>
+      <p style="margin-top:1.5rem"><a class="link-plain" href="/cast.html">Meet the characters</a></p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="rule" role="presentation"></div>
+    <div class="footer-grid">
+      <a class="brand" href="/"><img src="/assets/img/brand/wordmark.svg" width="900" height="200" alt="The Graphite Mind, home" loading="lazy"></a>
+      <div class="footer-nav-wrap">
+        <ul class="footer-nav">
+          <li><a href="/#videos">Videos</a></li>
+          <li><a href="/cast.html">Cast</a></li>
+          <li><a href="/how-its-made.html">How it’s made</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="https://www.youtube.com/@TheGraphiteMind">YouTube</a></li>
+        </ul>
+        <p class="footer-small" style="margin-top:1.5rem">&copy; 2026 The Graphite Mind. Contact: <a href="mailto:hello@thegraphitemind.com">hello@thegraphitemind.com</a></p>
+        <p class="footer-small" style="margin-top:0.5rem">Voices in our videos are AI voices made with ElevenLabs. Maps use Natural Earth data.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "The Graphite Mind",
+  "short_name": "Graphite Mind",
+  "description": "Big questions, drawn in code. Animated explainers about history, science and psychology.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F3EEE3",
+  "theme_color": "#F3EEE3",
+  "icons": [
+    {
+      "src": "/assets/img/brand/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/brand/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/brand/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
