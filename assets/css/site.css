@@ -333,7 +333,7 @@ mark {
 .hero__scene .layer { position: absolute; left: -2.5%; top: -2.5%; width: 105%; height: 105%; max-width: none; will-change: transform; }
 /* the flat image is zoomed 5% like the live layers, so the swap to the layers does not jump */
 .hero__scene .hero-flat { transform: scale(1.05); }
-.hero__scene.is-live .hero-flat { visibility: hidden; }
+/* the flat image stays under the opaque back layer, so the frame is never empty while layers paint */
 
 @media (min-width: 900px) {
   .hero__grid {
