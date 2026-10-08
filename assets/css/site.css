@@ -253,7 +253,7 @@ mark {
 @media (min-width: 900px) { .brand img { height: 4.4rem; margin-block: -0.85rem; } }
 
 .nav-desktop { display: none; }
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .nav-desktop { display: flex; align-items: center; gap: clamp(1rem, 2.6vw, 2.25rem); }
   .menu { display: none; }
 }
@@ -642,3 +642,78 @@ a:hover .thumb img, a.thumb:hover img { filter: brightness(1.07) saturate(1.05);
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
   .hero__scene .layer { transform: none !important; }
 }
+
+/* ---- v2: readability + company pages ---- */
+
+/* prose: easier reading */
+.prose { max-width: var(--measure); }
+.prose p, .prose li { line-height: 1.7; }
+.prose h3 { font-family: var(--display); font-size: var(--step-1); margin-top: var(--s-6); }
+
+/* split headings: align the heading with the first body line */
+.split__head h2 { padding-top: var(--s-3); }
+
+/* roadmap: numbered steps, one column per step on wide screens */
+ol.roadmap {
+  list-style: none;
+  margin: var(--s-6) 0 0;
+  padding: 0;
+  counter-reset: step;
+  display: grid;
+  gap: var(--s-5);
+}
+ol.roadmap > li {
+  counter-increment: step;
+  border-top: 2px solid var(--ink);
+  padding-top: var(--s-4);
+}
+ol.roadmap > li::before {
+  content: counter(step);
+  display: inline-block;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-2);
+  line-height: 1;
+  margin-bottom: var(--s-3);
+  border-bottom: 0.35em solid var(--yellow);
+  padding: 0 0.05em;
+}
+ol.roadmap li h3 { font-family: var(--display); font-size: var(--step-1); margin: 0; }
+ol.roadmap li p { color: var(--pencil); margin: var(--s-2) 0 0; }
+@media (min-width: 900px) {
+  ol.roadmap { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
+}
+
+/* facts: two-column fact sheet on wide screens */
+dl.facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: var(--s-5) 0 0;
+}
+dl.facts dt,
+dl.facts dd {
+  margin: 0;
+  padding: var(--s-3) 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--pencil) 35%, transparent);
+}
+dl.facts dt { font-family: var(--display); font-weight: 600; padding-bottom: 0; border-bottom: 0; }
+dl.facts dd { padding-top: var(--s-1); }
+dl.facts dd + dt { padding-top: var(--s-3); }
+@media (min-width: 700px) {
+  dl.facts { grid-template-columns: 14rem 1fr; }
+  dl.facts dt { padding-bottom: var(--s-3); padding-top: var(--s-3); border-bottom: 1px solid color-mix(in srgb, var(--pencil) 35%, transparent); }
+  dl.facts dd { padding-top: var(--s-3); }
+  dl.facts dd + dt { padding-top: var(--s-3); }
+}
+
+/* keyboard focus: one clear ring */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--denim);
+  outline-offset: 3px;
+}
+
+/* a text link placed right after a button */
+.btn + a { margin-left: var(--s-5); }
+.nav-desktop a.nav-link { white-space: nowrap; }
