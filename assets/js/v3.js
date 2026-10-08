@@ -142,8 +142,10 @@
     }
 
     btn.disabled = true; scrub.disabled = true;
+    root.classList.add("is-live");   /* without this class the page shows only the finished drawing */
     onView(root, 0, function () {
-      fetch(src).then(function (r) { return r.json(); }).then(init).catch(function () { root.classList.add("is-failed"); });
+      fetch(src).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(init)
+        .catch(function () { root.classList.remove("is-live"); root.classList.add("is-failed"); });
     }, "400px");
   }
 
@@ -193,7 +195,7 @@
     var i = 0, timer = 0, auto = !reduce;
     function show(k, user) {
       i = k;
-      tabs.forEach(function (t, j) { t.setAttribute("aria-selected", j === k ? "true" : "false"); });
+      tabs.forEach(function (t, j) { t.setAttribute("aria-pressed", j === k ? "true" : "false"); });
       var t = tabs[k];
       big.classList.remove("is-in");
       void big.offsetWidth;

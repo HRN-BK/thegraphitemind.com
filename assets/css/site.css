@@ -798,6 +798,10 @@ summary:focus-visible {
 .drawon.is-ready .drawon__svg .f { opacity: 0; }
 .drawon.is-ready .drawon__svg .f.on { opacity: 1; }
 .drawon--scene .drawon__art { min-height: 0; }
+.drawon--scene .drawon__art img { width: 100%; height: auto; max-height: none; }
+/* no script, or the data failed to load: show only the finished drawing */
+.drawon:not(.is-live) { grid-template-columns: minmax(0, 1fr); }
+.drawon:not(.is-live) .drawon__code, .drawon:not(.is-live) .drawon__bar { display: none; }
 .drawon--scene.is-done .drawon__art { cursor: crosshair; }
 .drawon__bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
 .drawon__play { min-width: 7.5rem; }
@@ -936,7 +940,7 @@ summary:focus-visible {
   padding: 0.3em 0.75em;
   cursor: pointer;
 }
-.langs__tab[aria-selected="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+.langs__tab[aria-pressed="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
 .langs:not(.is-live) .langs__tab { cursor: default; }
 
 /* reel */
