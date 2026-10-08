@@ -1,5 +1,7 @@
-/* v3 blocks: draw-on players (real engine code, line by line), the production feed, the language line and the reel.
-   Everything works without this file: the pages show the finished drawing, the full feed and every language. */
+/* v3 + v4 blocks: draw-on players (real engine code, line by line), the production feed, the language line, the reel,
+   the Zee playground, the before/after slider and the preview clips on video cards.
+   Everything works without this file: the pages show the finished drawing, the full feed, every language, the default
+   Zee, both pictures side by side and the plain thumbnails. */
 (function () {
   "use strict";
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -301,10 +303,89 @@
     });
   }
 
+  /* ---------- preview clips on video cards: a few muted seconds cut from the published video.
+     With a mouse, a card plays while the pointer (or keyboard focus) is on it. On touch screens, the card nearest the
+     middle of the screen plays. One clip at a time, each made only when first needed; the thumbnail stays underneath
+     and shows again when the clip stops. Skipped under reduced motion and Save-Data. ---------- */
+  function Previews(thumbs) {
+    var save = navigator.connection && navigator.connection.saveData;
+    if (reduce || save || !thumbs.length) return;
+    var current = null;
+    function clip(a) {
+      var v = a.querySelector(".thumb__clip");
+      if (v) return v;
+      v = document.createElement("video");
+      v.className = "thumb__clip";
+      v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto";
+      v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true");
+      v.addEventListener("playing", function () { if (current === a) a.classList.add("is-playing"); });
+      v.addEventListener("error", function () { a.classList.remove("is-playing"); a.removeAttribute("data-preview"); v.remove(); if (current === a) current = null; });
+      v.src = a.getAttribute("data-preview");
+      a.insertBefore(v, a.querySelector(".badge"));
+      return v;
+    }
+    function stop() {
+      if (!current) return;
+      var v = current.querySelector(".thumb__clip");
+      current.classList.remove("is-playing");
+      if (v) v.pause();
+      current = null;
+    }
+    function start(a) {
+      if (current === a || !a.hasAttribute("data-preview")) return;
+      stop();
+      current = a;
+      var v = clip(a);
+      try { v.currentTime = 0; } catch (e) {}
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (!current) return;
+      var v = current.querySelector(".thumb__clip");
+      if (!v) return;
+      if (document.hidden) v.pause(); else { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    });
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      thumbs.forEach(function (a) {
+        var card = a.closest(".video-item, .newest") || a;
+        card.addEventListener("pointerenter", function () { start(a); });
+        card.addEventListener("pointerleave", function () { if (current === a) stop(); });
+        card.addEventListener("focusin", function () { start(a); });
+        card.addEventListener("focusout", function (e) { if (current === a && !card.contains(e.relatedTarget)) stop(); });
+      });
+      return;
+    }
+    if (!IO) return;
+    var seen = [], timer = 0;
+    function pick() {                       /* a card must stay in the middle band for a moment: a fast swipe past loads nothing */
+      clearTimeout(timer);
+      if (current && seen.indexOf(current) < 0) stop();
+      timer = setTimeout(function () {
+        var mid = window.innerHeight / 2, best = null, bd = 1e9;
+        seen.forEach(function (a) {
+          var r = a.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid);
+          if (d < bd) { bd = d; best = a; }
+        });
+        if (best) start(best); else stop();
+      }, 350);
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var i = seen.indexOf(e.target);
+        if (e.isIntersecting && i < 0) seen.push(e.target);
+        if (!e.isIntersecting && i >= 0) seen.splice(i, 1);
+      });
+      pick();
+    }, { rootMargin: "-30% 0px -30% 0px" });
+    thumbs.forEach(function (a) { io.observe(a); });
+  }
+
   [].forEach.call(document.querySelectorAll(".drawon[data-src]"), Drawon);
   [].forEach.call(document.querySelectorAll(".feed"), Feed);
   [].forEach.call(document.querySelectorAll(".langs"), Langs);
   [].forEach.call(document.querySelectorAll(".reel"), Reel);
   [].forEach.call(document.querySelectorAll(".zeeplay[data-ages]"), Play);
   [].forEach.call(document.querySelectorAll(".ba"), BA);
+  Previews([].slice.call(document.querySelectorAll(".thumb[data-preview]")));
 })();

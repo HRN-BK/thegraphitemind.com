@@ -1040,3 +1040,20 @@ button.link-plain:hover { color: var(--ink); text-decoration-thickness: 3px; tex
 .ba__range:focus-visible ~ .ba__line::after { outline: 3px solid var(--yellow); outline-offset: 2px; }
 .feed__item .ba { grid-column: 1 / -1; }
 @media (min-width: 900px) { .feed__item .ba { grid-column: 2; } }
+
+/* ---------- v4: preview clips on video cards (v3.js Previews). The clip sits inside the thumbnail's ink border,
+   fades in once it is really playing and fades out to the thumbnail when it stops. The runtime badge stays on top. */
+.thumb__clip {
+  position: absolute;
+  left: 2px; top: 2px;
+  width: calc(100% - 4px); height: calc(100% - 4px);
+  object-fit: cover;
+  border-radius: max(0px, calc(var(--r-img) - 2px));
+  background: var(--paper-2);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.thumb.is-playing .thumb__clip { opacity: 1; }
+.thumb .badge { z-index: 1; }
+@media (prefers-reduced-motion: reduce) { .thumb__clip { display: none; } }
