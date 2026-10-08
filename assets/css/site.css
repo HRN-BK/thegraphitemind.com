@@ -465,8 +465,8 @@ a:hover .thumb img, a.thumb:hover img { filter: brightness(1.07) saturate(1.05);
 .cast-teaser__text .link-plain { display: inline-block; margin-top: var(--s-4); }
 @media (min-width: 900px) {
   .cast-teaser { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--s-6); }
-  .cast-teaser__art { grid-column: 1 / span 4; width: auto; }
-  .cast-teaser__text { grid-column: 6 / span 7; }
+  .cast-teaser__art { grid-column: 1 / span 5; width: auto; }
+  .cast-teaser__text { grid-column: 7 / span 6; }
 }
 .lineup { margin-top: var(--s-7); }
 .lineup__scroll { overflow-x: auto; margin-inline: calc(-1 * var(--gutter)); padding-inline: var(--gutter); }
@@ -967,3 +967,37 @@ button.link-plain {
 }
 button.link-plain:hover { color: var(--ink); text-decoration-thickness: 3px; text-decoration-color: var(--yellow); }
 .on-ink button.link-plain { color: var(--paper); text-decoration-color: var(--yellow); }
+
+/* ---------- v4: Zee playground (home teaser + cast page) ---------- */
+.zeeplay { display: grid; gap: var(--s-4); }
+.zeeplay__fig { margin: 0; }
+.zeeplay__art { width: min(100%, 15rem); }  /* small on phones so the picture and the controls fit on one screen */
+.zeeplay__art img { display: block; width: 100%; height: auto; max-height: 30rem; object-fit: contain; object-position: left bottom; }
+.zeeplay__code { margin-top: var(--s-3); }
+.zeeplay__code code {
+  display: inline-block; max-width: 100%;
+  font: 500 0.82rem/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color: var(--ink); background: rgba(52, 52, 56, 0.07);
+  border-radius: 6px; padding: 0.35em 0.6em; overflow-wrap: anywhere;
+}
+.zeeplay__code .tk-s { color: #8a5a00; }
+.zeeplay__ctl { display: grid; gap: var(--s-4); }
+.zeeplay:not(.is-live) .zeeplay__ctl { display: none; }
+.zeeplay__moods { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.zeeplay__mood {
+  font: 600 var(--step--1)/1.3 var(--display), sans-serif;
+  color: var(--ink); background: transparent;
+  border: 2px solid var(--ink); border-radius: var(--r-btn);
+  padding: 0.4em 0.85em; cursor: pointer; min-height: 2.75rem;
+}
+.zeeplay__mood:hover { background: rgba(236, 172, 20, 0.22); }
+.zeeplay__mood[aria-pressed="true"] { background: var(--yellow); }
+.zeeplay__age { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: var(--s-4); max-width: 22rem; }
+.zeeplay__age label { font-family: var(--display); font-weight: 700; font-size: var(--step--1); }
+.zeeplay__range { width: 100%; accent-color: var(--ink); min-height: 2.75rem; margin: 0; }
+.zeeplay__ticks { --thumb: 16px; grid-column: 2; position: relative; height: 1.5em; list-style: none; margin: -0.35rem 0 0; padding: 0; font-size: var(--step--1); color: var(--pencil); }
+.zeeplay__ticks li { position: absolute; top: 0; left: calc(var(--thumb) / 2 + (100% - var(--thumb)) * var(--i) / 3); transform: translateX(-50%); white-space: nowrap; }
+@media (min-width: 900px) {
+  .zeeplay__art { width: min(100%, 20rem); }
+  .cast-teaser__art .zeeplay__art { width: min(100%, 19rem); }
+}

@@ -200,11 +200,24 @@
 <section class="section" id="cast" aria-labelledby="h-cast">
   <div class="wrap">
     <div class="cast-teaser">
-      <div class="cast-teaser__art stage"><img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, the main character of the channel, drawn in the yellow hoodie, standing and looking curious." loading="lazy" decoding="async"></div>
+      <div class="cast-teaser__art"><div class="zeeplay" data-base="/assets/img/cast/play/" data-ages="zee_kid,zee-kid,Age 7|zee_12,zee-12,Age 12|zee,zee,Age 25|zee_old,zee-old,In 2070">
+  <figure class="zeeplay__fig">
+    <div class="zeeplay__art stage"><img src="/assets/img/cast/play/zee-happy.webp" width="457" height="760" alt="Zee, age 25, happy, waving." class="zeeplay__img" loading="lazy" decoding="async"></div>
+    <figcaption class="zeeplay__code"><code>figure("zee", pose="wave", mood="happy")</code></figcaption>
+  </figure>
+  <div class="zeeplay__ctl">
+    <div class="zeeplay__moods" role="group" aria-label="Zee's mood"><button type="button" class="zeeplay__mood" data-mood="happy" data-pose="wave" data-desc="waving" aria-pressed="true">Happy</button><button type="button" class="zeeplay__mood" data-mood="deadpan" data-pose="shrug" data-desc="shrugging" aria-pressed="false">Deadpan</button><button type="button" class="zeeplay__mood" data-mood="shocked" data-pose="arms_up" data-desc="with both arms up" aria-pressed="false">Shocked</button><button type="button" class="zeeplay__mood" data-mood="smug" data-pose="hips" data-desc="with hands on hips" aria-pressed="false">Smug</button><button type="button" class="zeeplay__mood" data-mood="sleepy" data-pose="slump" data-desc="slumped over, asleep" aria-pressed="false">Sleepy</button></div>
+    <div class="zeeplay__age">
+      <label for="zp-home-age">Age</label>
+      <input id="zp-home-age" class="zeeplay__range" type="range" min="0" max="3" step="1" value="2" aria-valuetext="Age 25">
+      <ol class="zeeplay__ticks" aria-hidden="true"><li style="--i:0">7</li><li style="--i:1">12</li><li style="--i:2">25</li><li style="--i:3">2070</li></ol>
+    </div>
+  </div>
+</div></div>
       <div class="cast-teaser__text">
         <h2 id="h-cast">Zee does the doubting.</h2>
         <p>Zee is our Gen Z skeptic, in a yellow hoodie, with a question for every big claim. When the narrator says something impressive, Zee wants to see the proof.</p>
-        <p>We have drawn Zee at four ages, from a kid with a backpack to an old man with glasses. It is the same function each time, with different settings.</p>
+        <p>Pick a mood, then slide the age. Every picture comes from the same function with different settings, and the line under Zee is the exact call.</p>
         <a class="link-plain" href="/cast.html">Meet the cast</a>
       </div>
     </div>

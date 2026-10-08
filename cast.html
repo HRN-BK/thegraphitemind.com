@@ -59,12 +59,25 @@
 <main id="main">
 <div class="wrap page-head">
   <h1>The cast, all drawn in Python.</h1>
-  <p class="lead">Stick figures with strong opinions. Each one is a function, so any of them can be happy, worried or asleep on command. Here are the ones with the biggest parts.</p>
+  <p class="lead">Stick figures with strong opinions. Each one is a function, so any of them can be happy, shocked or asleep on command. Try it with Zee below. Here are the ones with the biggest parts.</p>
 </div>
 <section class="cast-entry" id="zee" aria-labelledby="h-zee">
   <div class="wrap">
     <div class="cast-entry__grid">
-      <div class="cast-entry__art stage"><img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, drawn in the style of the videos" loading="lazy" decoding="async"></div>
+      <div class="cast-entry__art"><div class="zeeplay" data-base="/assets/img/cast/play/" data-ages="zee_kid,zee-kid,Age 7|zee_12,zee-12,Age 12|zee,zee,Age 25|zee_old,zee-old,In 2070">
+  <figure class="zeeplay__fig">
+    <div class="zeeplay__art stage"><img src="/assets/img/cast/play/zee-happy.webp" width="457" height="760" alt="Zee, age 25, happy, waving." class="zeeplay__img" loading="lazy" decoding="async"></div>
+    <figcaption class="zeeplay__code"><code>figure("zee", pose="wave", mood="happy")</code></figcaption>
+  </figure>
+  <div class="zeeplay__ctl">
+    <div class="zeeplay__moods" role="group" aria-label="Zee's mood"><button type="button" class="zeeplay__mood" data-mood="happy" data-pose="wave" data-desc="waving" aria-pressed="true">Happy</button><button type="button" class="zeeplay__mood" data-mood="deadpan" data-pose="shrug" data-desc="shrugging" aria-pressed="false">Deadpan</button><button type="button" class="zeeplay__mood" data-mood="shocked" data-pose="arms_up" data-desc="with both arms up" aria-pressed="false">Shocked</button><button type="button" class="zeeplay__mood" data-mood="smug" data-pose="hips" data-desc="with hands on hips" aria-pressed="false">Smug</button><button type="button" class="zeeplay__mood" data-mood="sleepy" data-pose="slump" data-desc="slumped over, asleep" aria-pressed="false">Sleepy</button></div>
+    <div class="zeeplay__age">
+      <label for="zp-cast-age">Age</label>
+      <input id="zp-cast-age" class="zeeplay__range" type="range" min="0" max="3" step="1" value="2" aria-valuetext="Age 25">
+      <ol class="zeeplay__ticks" aria-hidden="true"><li style="--i:0">7</li><li style="--i:1">12</li><li style="--i:2">25</li><li style="--i:3">2070</li></ol>
+    </div>
+  </div>
+</div></div>
       <div class="cast-entry__text">
         <h2 id="h-zee">Zee</h2>
         <p class="cast-entry__role">The skeptical Gen Z sidekick</p>

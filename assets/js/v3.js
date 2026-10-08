@@ -231,8 +231,47 @@
     io.observe(v);
   }
 
+  /* ---------- Zee playground: mood buttons + age slider swap pre-rendered engine pictures; the code line shows the call ---------- */
+  function Play(root) {
+    var base = root.getAttribute("data-base");
+    var ages = root.getAttribute("data-ages").split("|").map(function (a) { a = a.split(","); return { who: a[0], file: a[1], text: a[2] }; });
+    var pic = root.querySelector(".zeeplay__img");
+    var code = root.querySelector(".zeeplay__code code");
+    var moods = [].slice.call(root.querySelectorAll(".zeeplay__mood"));
+    var range = root.querySelector(".zeeplay__range");
+    var age = +range.value, mood = moods[0], want = "", warmed = false;
+    function url(a, m) { return base + ages[a].file + "-" + m.getAttribute("data-mood") + ".webp"; }
+    function warm() {
+      if (warmed) return; warmed = true;
+      ages.forEach(function (_, a) { moods.forEach(function (m) { new Image().src = url(a, m); }); });
+    }
+    function draw() {
+      var a = ages[age], m = mood.getAttribute("data-mood"), src = url(age, mood);
+      want = src;
+      code.innerHTML = 'figure(<span class="tk-s">"' + a.who + '"</span>, pose=<span class="tk-s">"' + mood.getAttribute("data-pose") +
+        '"</span>, mood=<span class="tk-s">"' + m + '"</span>)';
+      range.setAttribute("aria-valuetext", a.text);
+      var alt = "Zee, " + a.text.toLowerCase() + ", " + m + ", " + mood.getAttribute("data-desc") + ".";
+      var im = new Image();
+      im.src = src;
+      var swap = function () { if (want !== src) return; pic.src = src; pic.alt = alt; };
+      im.decode ? im.decode().then(swap, swap) : (im.onload = swap);
+    }
+    moods.forEach(function (b) {
+      b.addEventListener("click", function () {
+        moods.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+        mood = b; warm(); draw();
+      });
+    });
+    range.addEventListener("input", function () { age = +range.value; warm(); draw(); });
+    root.addEventListener("pointerenter", warm);
+    root.addEventListener("focusin", warm);
+    root.classList.add("is-live");   /* without this class only the default picture and its call show */
+  }
+
   [].forEach.call(document.querySelectorAll(".drawon[data-src]"), Drawon);
   [].forEach.call(document.querySelectorAll(".feed"), Feed);
   [].forEach.call(document.querySelectorAll(".langs"), Langs);
   [].forEach.call(document.querySelectorAll(".reel"), Reel);
+  [].forEach.call(document.querySelectorAll(".zeeplay[data-ages]"), Play);
 })();
