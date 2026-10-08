@@ -1,4 +1,4 @@
-/* The Graphite Mind. Two small jobs: close the phone menu, and the one hero parallax moment.
+/* The Graphite Mind. Two small jobs: close the phone menu, and the hero loop.
    No libraries. Everything here is optional: without JS the menu is a <details> and the hero shows the flat image. */
 (function () {
   "use strict";
@@ -21,112 +21,65 @@
     });
   }
 
-  /* ---- hero parallax: three transparent layers, transform only, rAF ---- */
-  var scene = document.querySelector("[data-hero-layers]");
+  /* ---- hero loop: an 8-second loop drawn by the engine, laid over the flat picture (which is its first frame).
+     Only when motion is allowed and data saving is off. Plays while the hero is on screen; the button pauses it. ---- */
+  var scene = document.querySelector("[data-hero-loop]");
   if (!scene) return;
-
-  var wide = window.matchMedia("(min-width: 900px)");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-  var fine = window.matchMedia("(hover: hover) and (pointer: fine)");
+  var conn = navigator.connection;
+  if (reduce.matches || (conn && conn.saveData)) return;
 
-  // Each layer is drawn 5% larger than the scene (see site.css), so it has 2.5% of the scene
-  // to slide in before its edge shows. Shifts are fractions of that spare room, so they can
-  // never reveal a seam at any scene size. Front moves the most, back the least.
-  var SHARE = [0.25, 0.6, 1];  // back, mid, front: share of the spare room
-  var ROOM = 0.025 * 0.92;     // 2.5% of the scene, with a small safety margin
-  var boxW = 600, boxH = 375;
-  var layers = [];
-  var live = false;
-  var tx = 0, ty = 0, cx = 0, cy = 0; // target / current pointer position, -1..1
-  var scrollP = 0, curScroll = 0;
-  var raf = 0;
+  var px = scene.offsetWidth * (window.devicePixelRatio || 1);
+  var v = document.createElement("video");
+  v.className = "hero__video";
+  v.muted = true; v.setAttribute("muted", "");
+  v.playsInline = true; v.setAttribute("playsinline", "");
+  v.loop = true;
+  v.preload = "auto";
+  v.setAttribute("aria-hidden", "true");
+  v.setAttribute("disablepictureinpicture", "");
+  v.src = scene.getAttribute(px > 900 ? "data-loop-wide" : "data-loop-narrow");
 
-  function build() {
-    if (live) return;
-    var srcs;
-    try { srcs = JSON.parse(scene.getAttribute("data-hero-layers")); } catch (e) { return; }
-    var made = srcs.map(function (src) {
-      var im = new Image();
-      im.className = "layer";
-      im.alt = "";
-      im.setAttribute("aria-hidden", "true");
-      im.decoding = "async";
-      im.src = src;
-      return im;
-    });
-    Promise.all(made.map(function (im) {
-      return im.decode ? im.decode() : new Promise(function (ok, bad) { im.onload = ok; im.onerror = bad; });
-    })).then(function () {
-      if (!wide.matches || reduce.matches) return; // conditions changed while loading
-      made.forEach(function (im) { scene.appendChild(im); });
-      layers = made;
-      scene.classList.add("is-live");
-      live = true;
-      measure();
-      onScroll();
-      frame();
-    }).catch(function () { /* flat image stays */ });
+  var ICON_PAUSE = '<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="4" y="3" width="4" height="14" rx="1"/><rect x="12" y="3" width="4" height="14" rx="1"/></svg>';
+  var ICON_PLAY = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 3l12 7-12 7z"/></svg>';
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "hero__pause";
+  var userPaused = false, onScreen = true;
+
+  function label() {
+    var paused = v.paused;
+    btn.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
+    btn.setAttribute("aria-label", paused ? "Play the animation" : "Pause the animation");
   }
-
-  function destroy() {
-    if (!live) return;
-    layers.forEach(function (im) { if (im.parentNode) im.parentNode.removeChild(im); });
-    layers = [];
-    scene.classList.remove("is-live");
-    live = false;
-    cancelAnimationFrame(raf);
-    raf = 0;
+  function play() { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function sync() {
+    if (!userPaused && onScreen && !document.hidden && !reduce.matches) play(); else v.pause();
   }
-
-  function measure() {
-    boxW = scene.offsetWidth || boxW;
-    boxH = scene.offsetHeight || boxH;
-  }
-
-  function apply() {
-    var sc = Math.min(1, curScroll);
-    for (var i = 0; i < layers.length; i++) {
-      var x = -cx * SHARE[i] * ROOM * boxW;
-      var y = (-0.5 * cy - 0.5 * sc) * SHARE[i] * ROOM * boxH; // pointer 50%, scroll 50% of the room
-      layers[i].style.transform = "translate3d(" + x.toFixed(2) + "px," + y.toFixed(2) + "px,0)";
-    }
-  }
-
-  function frame() {
-    raf = 0;
-    if (!live) return;
-    cx += (tx - cx) * 0.09;
-    cy += (ty - cy) * 0.09;
-    curScroll += (scrollP - curScroll) * 0.12;
-    apply();
-    var moving = Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002 || Math.abs(scrollP - curScroll) > 0.002;
-    if (moving) raf = requestAnimationFrame(frame);
-  }
-  function kick() { if (live && !raf) raf = requestAnimationFrame(frame); }
-
-  function onScroll() {
-    var h = scene.offsetHeight || 1;
-    var r = scene.getBoundingClientRect();
-    // 0 when the scene sits at its natural place, rising to 1 once it has scrolled off the top
-    scrollP = Math.max(0, Math.min(1.2, -r.top / h));
-    kick();
-  }
-
-  window.addEventListener("resize", function () { measure(); kick(); }, { passive: true });
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("pointermove", function (e) {
-    if (!live || !fine.matches) return;
-    tx = (e.clientX / window.innerWidth) * 2 - 1;
-    ty = (e.clientY / window.innerHeight) * 2 - 1;
-    kick();
-  }, { passive: true });
-  document.addEventListener("pointerleave", function () { tx = 0; ty = 0; kick(); });
-
-  function evaluate() {
-    if (wide.matches && !reduce.matches) build(); else destroy();
-  }
-  [wide, reduce].forEach(function (mq) {
-    if (mq.addEventListener) mq.addEventListener("change", evaluate); else mq.addListener(evaluate);
+  btn.addEventListener("click", function () {
+    userPaused = !v.paused;
+    if (userPaused) v.pause(); else play();
   });
-  evaluate();
+  v.addEventListener("playing", function () { scene.classList.add("is-live"); });
+  v.addEventListener("play", label);
+  v.addEventListener("pause", label);
+  v.addEventListener("error", function () {   /* the flat picture stays */
+    scene.classList.remove("is-live");
+    if (v.parentNode) v.parentNode.removeChild(v);
+    if (btn.parentNode) btn.parentNode.removeChild(btn);
+  });
+  label();
+  scene.appendChild(v);
+  scene.appendChild(btn);
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { onScreen = e.isIntersecting; sync(); });
+    }, { threshold: 0.15 }).observe(scene);
+  } else {
+    sync();
+  }
+  document.addEventListener("visibilitychange", sync);
+  var onReduce = function () { if (reduce.matches) { v.pause(); scene.classList.remove("is-live"); } else sync(); };
+  if (reduce.addEventListener) reduce.addEventListener("change", onReduce); else reduce.addListener(onReduce);
 })();
