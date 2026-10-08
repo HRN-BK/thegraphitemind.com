@@ -92,7 +92,19 @@
         <li class="feed__item" data-stage="voice"><span class="who who--tool">ElevenLabs</span><p>92 lines voiced, one take per line. Every scene is then re-timed to the real voice.</p></li>
         <li class="feed__item feed__item--stage" data-stage="ship">Review and render</li>
         <li class="feed__item" data-stage="ship"><span class="who who--human">Founder</span><p>Watches the cut and sends notes: the elbows look wrong when Zee drinks.</p></li>
-        <li class="feed__item" data-stage="ship"><span class="who who--opus">Claude</span><p>Fixes the drinking pose: elbows below the shoulders, the bottle at the lips.</p></li>
+        <li class="feed__item" data-stage="ship"><span class="who who--opus">Claude</span><p>Fixes the drinking pose: the elbow now hangs below the shoulder, like a real arm.</p>
+          <figure class="ba">
+            <div class="ba__frame" style="--pos:50%">
+              <img class="ba__img ba__img--before" src="/assets/img/log/elbow-before.webp" width="820" height="656" loading="lazy" decoding="async" alt="Before the fix: Zee drinks from a cup with the arm pointing straight up beside the head, so no elbow shows.">
+              <img class="ba__img ba__img--after" src="/assets/img/log/elbow-after.webp" width="820" height="656" loading="lazy" decoding="async" alt="After the fix: Zee holds the same cup with the elbow bent low, beside the body.">
+              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Slide to compare before and after the fix" aria-valuetext="Half before, half after">
+              <span class="ba__line" aria-hidden="true"></span>
+              <span class="ba__tag ba__tag--before" aria-hidden="true">Before</span>
+              <span class="ba__tag ba__tag--after" aria-hidden="true">After</span>
+            </div>
+            <figcaption>The same second of the video, rendered before and after the fix on 7 October.</figcaption>
+          </figure>
+        </li>
         <li class="feed__item" data-stage="ship"><span class="who who--render">Render</span><p>Final render: 8 minutes 37 seconds, &minus;14.0 LUFS, English subtitles.</p></li>
       </ol>
       <button class="link-plain feed__again" type="button" hidden>Play the log again</button>

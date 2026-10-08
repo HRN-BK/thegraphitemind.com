@@ -269,9 +269,42 @@
     root.classList.add("is-live");   /* without this class only the default picture and its call show */
   }
 
+  /* ---------- before/after slider: the range input covers the picture, so drag, tap and arrow keys all work.
+     One slow sweep on first view shows that it moves (skipped under reduced motion). ---------- */
+  function BA(root) {
+    var r = root.querySelector(".ba__range"), f = root.querySelector(".ba__frame"), raf = 0, touched = false;
+    if (!r || !f) return;
+    function set(v) {
+      f.style.setProperty("--pos", v + "%");
+      r.setAttribute("aria-valuetext", Math.round(v) + "% before, " + (100 - Math.round(v)) + "% after");
+    }
+    r.addEventListener("input", function () { touched = true; cancelAnimationFrame(raf); set(+r.value); });
+    root.classList.add("is-live");
+    set(+r.value);
+    if (reduce || !IO) return;
+    onView(f, 0.7, function () {
+      setTimeout(function () {
+        if (touched) return;
+        var keys = [50, 22, 78, 50], k = 0, t0 = 0, dur = 750;
+        function step(t) {
+          if (touched) return;
+          if (!t0) t0 = t;
+          var p = Math.min(1, (t - t0) / dur), e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          var v = keys[k] + (keys[k + 1] - keys[k]) * e;
+          set(v); r.value = String(Math.round(v));
+          if (p < 1) { raf = requestAnimationFrame(step); return; }
+          k++; t0 = 0;
+          if (k < keys.length - 1) raf = requestAnimationFrame(step);
+        }
+        raf = requestAnimationFrame(step);
+      }, 900);
+    });
+  }
+
   [].forEach.call(document.querySelectorAll(".drawon[data-src]"), Drawon);
   [].forEach.call(document.querySelectorAll(".feed"), Feed);
   [].forEach.call(document.querySelectorAll(".langs"), Langs);
   [].forEach.call(document.querySelectorAll(".reel"), Reel);
   [].forEach.call(document.querySelectorAll(".zeeplay[data-ages]"), Play);
+  [].forEach.call(document.querySelectorAll(".ba"), BA);
 })();
