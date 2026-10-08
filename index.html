@@ -35,9 +35,10 @@
   "name": "The Graphite Mind",
   "url": "https://thegraphitemind.com/",
   "logo": "https://thegraphitemind.com/assets/img/brand/icon-512.png",
-  "email": "hello@thegraphitemind.com",
+  "email": "henry@thegraphitemind.com",
   "sameAs": [
-    "https://www.youtube.com/@TheGraphiteMind"
+    "https://www.youtube.com/@TheGraphiteMind",
+    "https://www.facebook.com/profile.php?id=61594804304042"
   ],
   "description": "Animated explainers about history, science and psychology. Every frame is drawn by Python code that Claude Code wrote. New videos on YouTube."
 }</script>
@@ -199,7 +200,7 @@
 <section class="section" id="cast" aria-labelledby="h-cast">
   <div class="wrap">
     <div class="cast-teaser">
-      <div class="cast-teaser__art stage"><img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, the skeptical sidekick of the channel, drawn in the yellow hoodie, standing and looking curious." loading="lazy" decoding="async"></div>
+      <div class="cast-teaser__art stage"><img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, the main character of the channel, drawn in the yellow hoodie, standing and looking curious." loading="lazy" decoding="async"></div>
       <div class="cast-teaser__text">
         <h2 id="h-cast">Zee does the doubting.</h2>
         <p>Zee is our Gen Z skeptic, in a yellow hoodie, with a question for every big claim. When the narrator says something impressive, Zee wants to see the proof.</p>
@@ -216,47 +217,23 @@
 
 <section class="section band-ink on-ink" id="made" aria-labelledby="h-code">
   <div class="wrap">
-    <h2 id="h-code">Zee is a function.</h2>
-    <p style="margin-top:1rem">The code below is real. It is the part of our drawing engine that draws Zee&rsquo;s eyes, brows and mouth, copied from the file. One short block is left out and marked.</p>
-    <div class="code-band" style="margin-top:2.5rem">
-      <div class="code-band__code"><pre class="code-block" tabindex="0" role="region" aria-label="Python code that draws Zee’s eyes, brows and mouth"><code><span class="tk-c"># the-graphite-mind/longform/engine/cast.py, lines 299-321</span>
-<span class="tk-c"># (inside figure(): eyes, brows, cheeks and mouth; lines 309-310 left out)</span>
-    ex = r * <span class="tk-n">0.36</span>
-    ey = cy - r * <span class="tk-n">0.02</span>
-    closed = blink <span class="tk-k">or</span> mood == <span class="tk-s">"sleepy"</span>
-    <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
-        ecx = cx + side * ex + look[<span class="tk-n">0</span>]
-        ecy = ey + look[<span class="tk-n">1</span>]
-        <span class="tk-k">if</span> closed:
-            d.line(catmull([(ecx - <span class="tk-n">10</span>, ecy), (ecx, ecy + <span class="tk-n">6</span>), (ecx + <span class="tk-n">10</span>, ecy)], <span class="tk-n">5</span>), LW)
-        <span class="tk-k">else</span>:
-            ry = <span class="tk-n">14</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">17</span>
-            <span class="tk-c"># ...</span>
-            d.ellipse(ecx, ecy, <span class="tk-n">9</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">11</span>, ry, INK, outline=<span class="tk-k">False</span>)
-            d.dot((ecx - <span class="tk-n">3</span>, ecy - <span class="tk-n">5</span>), <span class="tk-n">3.4</span>, C[<span class="tk-s">"white"</span>])
-        bp = BROWS.get(mood, BROWS[<span class="tk-s">"neutral"</span>])
-        pts = [(ecx - side * x * <span class="tk-n">0.9</span> - look[<span class="tk-n">0</span>] * <span class="tk-n">0.3</span>, ecy + y * <span class="tk-n">0.9</span>) <span class="tk-k">for</span> x, y <span class="tk-k">in</span> bp]
-        d.line(catmull(pts, <span class="tk-n">5</span>), LW * <span class="tk-n">0.85</span>)
-    <span class="tk-k">if</span> mood <span class="tk-k">in</span> (<span class="tk-s">"happy"</span>, <span class="tk-s">"laugh"</span>, <span class="tk-s">"proud"</span>):
-        <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
-            d.ellipse(cx + side * r * <span class="tk-n">0.6</span>, cy + r * <span class="tk-n">0.3</span>, <span class="tk-n">11</span>, <span class="tk-n">7</span>, C[<span class="tk-s">"pink"</span>], outline=<span class="tk-k">False</span>)
-    <span class="tk-k">if</span> mood == <span class="tk-s">"worried"</span>:
-        d.fill(ellipse_pts(cx + r * <span class="tk-n">0.85</span>, cy - r * <span class="tk-n">0.55</span>, <span class="tk-n">6</span>, <span class="tk-n">9</span>) , C[<span class="tk-s">"sky"</span>], width=<span class="tk-n">2.5</span>)
-    _mouth(d, mood, cx, cy, r, braces=<span class="tk-s">"braces"</span> <span class="tk-k">in</span> extras)</code></pre></div>
-      <div class="code-band__art">
-        <figure class="stage">
-          <img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, drawn by the code in the block on the left." loading="lazy" decoding="async">
-        </figure>
-        <p class="code-band__caption">This is Zee. This is also Zee.</p>
+    <div class="section-head">
+      <h2 id="h-code">Watch the code draw Zee.</h2>
+      <p>This is the real function from our drawing engine. Each line lights up as the strokes it makes appear.</p>
+    </div>
+    <div class="drawon drawon--figure" data-src="/assets/data/drawon-zee.json" data-ms="560" data-label="Zee, drawn stroke by stroke by the code next to it">
+      <div class="drawon__code" role="region" aria-label="The Python function that draws Zee, with the running line highlighted">
+        <p class="drawon__file">the-graphite-mind/longform/engine/cast.py</p>
+        <ol class="drawon__lines" tabindex="0"></ol>
+      </div>
+      <div class="drawon__art"><img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, drawn by the code shown next to it." loading="lazy" decoding="async"></div>
+      <div class="drawon__bar">
+        <button class="btn drawon__play" type="button" aria-pressed="false">Play</button>
+        <input class="drawon__scrub" type="range" min="0" max="0" value="0" aria-label="Scrub through the drawing, one code step at a time">
+        <p class="drawon__status" aria-live="off">Every stroke, in the order the code makes it.</p>
       </div>
     </div>
-    <div class="code-band__more">
-      <div class="copy">
-        <p>Every character, prop, map and transition in our videos is a function like this one, and Claude Code wrote them. The music is generated by code. So are the edit and the render.</p>
-        <p>The voices are the exception. They are AI voices made with ElevenLabs, and we say so on purpose.</p>
-        <p style="margin-top:1.5rem"><a class="link-plain" href="/how-its-made.html">How it&rsquo;s made</a></p>
-      </div>
-    </div>
+    <p class="drawon__more">Characters, props, maps and transitions all work like this, and Claude Code wrote them. The voices are the exception: AI voices made with ElevenLabs. <a class="link-plain" href="/how-its-made.html">See a whole video get made</a></p>
   </div>
 </section>
 
@@ -280,10 +257,9 @@
   <div class="wrap split">
     <div class="split__head"><h2 id="h-about">Who makes this</h2></div>
     <div class="split__body">
-      <p class="lead-p">The Graphite Mind is a YouTube channel of animated explainers about <mark>history, science, psychology and health</mark>, made for viewers in the United States. The first video went up in September 2026.</p>
-      <p>A person picks every topic, reads every script, reviews every finished video and uploads it. Claude Code does the research notes, the scripts and all of the drawing code.</p>
-      <p>If we got something wrong, tell us. Questions, corrections, business and press all go to one address.</p>
-      <p class="contact-line"><a href="mailto:hello@thegraphitemind.com">hello@thegraphitemind.com</a></p>
+      <p class="lead-p">An independent studio making animated explainers about <mark>history, science, psychology and health</mark> for viewers in the United States, since September 2026.</p>
+      <p>A person picks every topic, reads every script and reviews every video. Spotted a mistake? Tell us.</p>
+      <p class="contact-line"><a href="mailto:henry@thegraphitemind.com">henry@thegraphitemind.com</a></p>
       <p style="margin-top:1.5rem"><a class="link-plain" href="/about.html">More about the channel</a></p>
     </div>
   </div>
@@ -304,13 +280,15 @@
           <li><a href="/press.html">Press kit</a></li>
           <li><a href="/privacy.html">Privacy</a></li>
           <li><a href="https://www.youtube.com/@TheGraphiteMind">YouTube</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61594804304042">Facebook</a></li>
         </ul>
-        <p class="footer-small" style="margin-top:1.5rem">&copy; 2026 The Graphite Mind. Contact: <a href="mailto:hello@thegraphitemind.com">hello@thegraphitemind.com</a></p>
+        <p class="footer-small" style="margin-top:1.5rem">&copy; 2026 The Graphite Mind. Contact: <a href="mailto:henry@thegraphitemind.com">henry@thegraphitemind.com</a></p>
         <p class="footer-small" style="margin-top:0.5rem">Voices in our videos are AI voices made with ElevenLabs. Maps use Natural Earth data.</p>
       </div>
     </div>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/v3.js" defer></script>
 </body>
 </html>

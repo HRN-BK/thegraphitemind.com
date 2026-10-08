@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How it's made | The Graphite Mind</title>
-  <meta name="description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <meta name="description" content="Watch a scene get drawn by its own code, follow one video from topic to final render, and see how each fact is checked before it is drawn.">
   <link rel="canonical" href="https://thegraphitemind.com/how-its-made.html">
   <meta name="theme-color" content="#F3EEE3">
   <meta name="color-scheme" content="light">
@@ -16,7 +16,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="The Graphite Mind">
   <meta property="og:title" content="How it&#x27;s made | The Graphite Mind">
-  <meta property="og:description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <meta property="og:description" content="Watch a scene get drawn by its own code, follow one video from topic to final render, and see how each fact is checked before it is drawn.">
   <meta property="og:url" content="https://thegraphitemind.com/how-its-made.html">
   <meta property="og:image" content="https://thegraphitemind.com/assets/img/brand/og-image.jpg">
   <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
   <meta property="og:image:alt" content="The Graphite Mind wordmark with Zee and the cast on ivory paper: Big questions, drawn in code.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How it&#x27;s made | The Graphite Mind">
-  <meta name="twitter:description" content="A person picks the topic. Claude Code writes the script and the Python that draws every frame. ElevenLabs voices, a Mac render queue, a human review.">
+  <meta name="twitter:description" content="Watch a scene get drawn by its own code, follow one video from topic to final render, and see how each fact is checked before it is drawn.">
   <meta name="twitter:image" content="https://thegraphitemind.com/assets/img/brand/og-image.jpg">
   <link rel="preload" href="/assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/literata-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -59,16 +59,47 @@
 <main id="main">
 <div class="wrap page-head">
   <h1>How a video gets made.</h1>
-  <p class="lead">Short version: a person decides what to make, Claude Code writes the script and the code that draws every frame, and a MacBook renders it. Long version below, with the parts that are not code listed too.</p>
+  <p class="lead">A person picks the topic. Claude researches it, writes the script and writes the code that draws every frame. Nothing is drawn by hand and nothing is stock footage.</p>
 </div>
 
-<section class="section section--tight-top" aria-labelledby="h-pipeline">
+<section class="section section--tight-top" id="log" aria-labelledby="h-log">
   <div class="wrap">
-    <div class="split">
-      <div class="split__head"><h2 id="h-pipeline">Five stages, one at a time.</h2></div>
-      <div class="split__body"><p>Each long video goes through the same five stages. Each stage is its own Claude Code session, started by hand. Nothing moves on by itself.</p></div>
+    <div class="section-head">
+      <h2 id="h-log">One video, start to finish.</h2>
+      <p>The production log of a recent video, <em>Everything Is Poison</em>, shortened. Claude Opus reviews, Claude Sonnet builds, and the founder has the last word.</p>
     </div>
-    <ol class="pipeline">
+    <div class="feed">
+      <ol class="rail" aria-label="Stages">
+        <li class="rail__step" data-stage="research">Research</li>
+        <li class="rail__step" data-stage="script">Script</li>
+        <li class="rail__step" data-stage="build">Animation</li>
+        <li class="rail__step" data-stage="voice">Voices</li>
+        <li class="rail__step" data-stage="ship">Review and render</li>
+      </ol>
+      <ol class="feed__list">
+        <li class="feed__item feed__item--stage" data-stage="research">Research</li>
+        <li class="feed__item" data-stage="research"><span class="who who--human">Founder</span><p>Picks the topic: everything is a poison, so why is that not scary?</p></li>
+        <li class="feed__item" data-stage="research"><span class="who who--opus">Claude Opus 5.5</span><p>Grades 51 claims by strength of evidence, from A (solid) to D (do not say). Lists 13 things the video must never say.</p></li>
+        <li class="feed__item feed__item--stage" data-stage="script">Script</li>
+        <li class="feed__item" data-stage="script"><span class="who who--opus">Claude Opus 5.5</span><p>Locks the script: 92 spoken lines, each with the picture it needs and a note on how to say it.</p></li>
+        <li class="feed__item feed__item--stage" data-stage="build">Animation, in review rounds</li>
+        <li class="feed__item" data-stage="build"><span class="who who--opus">Claude Opus 5.5</span><p>Briefs the builder: a rough animatic first. To pass, timing must be clean, no voices may overlap and loudness must be even.</p></li>
+        <li class="feed__item" data-stage="build"><span class="who who--sonnet">Claude Sonnet 5.5</span><p>Writes the scene code and renders the animatic: 71 scenes, 7 minutes 55 seconds.</p></li>
+        <li class="feed__item" data-stage="build"><span class="who who--opus">Claude Opus 5.5</span><p><span class="verdict verdict--no">Round 3: rejected</span> Five labels on the closing cards shrank below 44 pixels, too small to read on a phone.</p></li>
+        <li class="feed__item" data-stage="build"><span class="who who--sonnet">Claude Sonnet 5.5</span><p>Fixes it: all five labels back at 44 pixels, each inside its card.</p></li>
+        <li class="feed__item" data-stage="build"><span class="who who--opus">Claude Opus 5.5</span><p><span class="verdict verdict--yes">Round 4: passed</span> Loudness &minus;14.00 LUFS, every spoken line within 0.4 dB of the others.</p></li>
+        <li class="feed__item feed__item--stage" data-stage="voice">Voices</li>
+        <li class="feed__item" data-stage="voice"><span class="who who--tool">ElevenLabs</span><p>92 lines voiced, one take per line. Every scene is then re-timed to the real voice.</p></li>
+        <li class="feed__item feed__item--stage" data-stage="ship">Review and render</li>
+        <li class="feed__item" data-stage="ship"><span class="who who--human">Founder</span><p>Watches the cut and sends notes: the elbows look wrong when Zee drinks.</p></li>
+        <li class="feed__item" data-stage="ship"><span class="who who--opus">Claude</span><p>Fixes the drinking pose: elbows below the shoulders, the bottle at the lips.</p></li>
+        <li class="feed__item" data-stage="ship"><span class="who who--render">Render</span><p>Final video: 8 minutes 37 seconds, &minus;14.0 LUFS, English subtitles.</p></li>
+      </ol>
+      <button class="link-plain feed__again" type="button" hidden>Play the log again</button>
+    </div>
+    <details class="stages-more">
+      <summary>The five stages in detail</summary>
+      <ol class="pipeline">
       <li>
         <div class="p-head"><h3>Research and script</h3></div>
         <dl>
@@ -125,44 +156,88 @@
         </dl>
       </li>
     </ol>
+    </details>
   </div>
 </section>
 
-<section class="section band-ink on-ink" aria-labelledby="h-compare">
+<section class="section band-2" id="facts" aria-labelledby="h-facts">
   <div class="wrap">
-    <h2 id="h-compare">Zee, twice.</h2>
-    <p style="margin-top:1rem">Same Zee, two ways: the code, and the drawing it makes. The code is copied from the engine file.</p>
-    <div class="compare">
-      <figure>
-        <pre class="code-block" tabindex="0" role="region" aria-label="Python code that draws Zee’s eyes, brows and mouth"><code><span class="tk-c"># the-graphite-mind/longform/engine/cast.py, lines 299-321</span>
-<span class="tk-c"># (inside figure(): eyes, brows, cheeks and mouth; lines 309-310 left out)</span>
-    ex = r * <span class="tk-n">0.36</span>
-    ey = cy - r * <span class="tk-n">0.02</span>
-    closed = blink <span class="tk-k">or</span> mood == <span class="tk-s">"sleepy"</span>
-    <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
-        ecx = cx + side * ex + look[<span class="tk-n">0</span>]
-        ecy = ey + look[<span class="tk-n">1</span>]
-        <span class="tk-k">if</span> closed:
-            d.line(catmull([(ecx - <span class="tk-n">10</span>, ecy), (ecx, ecy + <span class="tk-n">6</span>), (ecx + <span class="tk-n">10</span>, ecy)], <span class="tk-n">5</span>), LW)
-        <span class="tk-k">else</span>:
-            ry = <span class="tk-n">14</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">17</span>
-            <span class="tk-c"># ...</span>
-            d.ellipse(ecx, ecy, <span class="tk-n">9</span> <span class="tk-k">if</span> mood != <span class="tk-s">"shocked"</span> <span class="tk-k">else</span> <span class="tk-n">11</span>, ry, INK, outline=<span class="tk-k">False</span>)
-            d.dot((ecx - <span class="tk-n">3</span>, ecy - <span class="tk-n">5</span>), <span class="tk-n">3.4</span>, C[<span class="tk-s">"white"</span>])
-        bp = BROWS.get(mood, BROWS[<span class="tk-s">"neutral"</span>])
-        pts = [(ecx - side * x * <span class="tk-n">0.9</span> - look[<span class="tk-n">0</span>] * <span class="tk-n">0.3</span>, ecy + y * <span class="tk-n">0.9</span>) <span class="tk-k">for</span> x, y <span class="tk-k">in</span> bp]
-        d.line(catmull(pts, <span class="tk-n">5</span>), LW * <span class="tk-n">0.85</span>)
-    <span class="tk-k">if</span> mood <span class="tk-k">in</span> (<span class="tk-s">"happy"</span>, <span class="tk-s">"laugh"</span>, <span class="tk-s">"proud"</span>):
-        <span class="tk-k">for</span> side <span class="tk-k">in</span> (-<span class="tk-n">1</span>, <span class="tk-n">1</span>):
-            d.ellipse(cx + side * r * <span class="tk-n">0.6</span>, cy + r * <span class="tk-n">0.3</span>, <span class="tk-n">11</span>, <span class="tk-n">7</span>, C[<span class="tk-s">"pink"</span>], outline=<span class="tk-k">False</span>)
-    <span class="tk-k">if</span> mood == <span class="tk-s">"worried"</span>:
-        d.fill(ellipse_pts(cx + r * <span class="tk-n">0.85</span>, cy - r * <span class="tk-n">0.55</span>, <span class="tk-n">6</span>, <span class="tk-n">9</span>) , C[<span class="tk-s">"sky"</span>], width=<span class="tk-n">2.5</span>)
-    _mouth(d, mood, cx, cy, r, braces=<span class="tk-s">"braces"</span> <span class="tk-k">in</span> extras)</code></pre>
-        <figcaption>From the drawing engine: how Zee&rsquo;s eyes, brows and mouth are drawn.</figcaption>
+    <div class="section-head">
+      <h2 id="h-facts">How a fact gets into a script.</h2>
+      <p>Before anything is drawn, Claude Opus 5.5 researches the topic, grades every claim by how strong the evidence is, and argues with its own draft in a review round. The founder reads the result.</p>
+    </div>
+    <dl class="grades">
+      <div><dt>A</dt><dd>Solid: official or several independent sources.</dd></div>
+      <div><dt>B</dt><dd>Likely: a good source, numbers rounded.</dd></div>
+      <div><dt>C</dt><dd>Debated: the line has to say &ldquo;may&rdquo;.</dd></div>
+      <div><dt>D</dt><dd>Wrong or unproven: never said.</dd></div>
+    </dl>
+    <ol class="roadmap factflow">
+      <li>
+        <h3>The source</h3>
+        <blockquote>&ldquo;All things are poison, and nothing is without poison. Only the dose makes a thing not a poison.&rdquo;</blockquote>
+        <p>Paracelsus, 1538, in translation. Graded A.</p>
+      </li>
+      <li>
+        <h3>The catch</h3>
+        <p>The famous short version, &ldquo;the dose makes the poison&rdquo;, came later. He never wrote those exact words, so the video cannot say he did.</p>
+      </li>
+      <li>
+        <h3>The line in the video</h3>
+        <blockquote>&ldquo;Today we say it shorter: the dose makes the poison.&rdquo;</blockquote>
+        <p>One of 51 graded claims behind this video.</p>
+      </li>
+    </ol>
+    <p class="factnote">The do-not-say list matters as much. That video was never allowed to suggest that normal drinking is risky, so Zee says it out loud: <q>No! Normal drinking is completely safe.</q></p>
+  </div>
+</section>
+
+<section class="section" id="scene" aria-labelledby="h-scene">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="h-scene">Watch a scene get built.</h2>
+      <p>The classroom from our library, built by its own code, line by line. When it is finished, move your pointer over it: the layers move at different speeds, the way they do on camera.</p>
+    </div>
+    <div class="drawon drawon--scene" data-src="/assets/data/drawon-classroom.json" data-ms="330" data-parallax data-label="A drawn classroom with a chalkboard, a clock, a teacher's desk and three student desks, built step by step by the code next to it">
+      <div class="drawon__code" role="region" aria-label="The Python function that builds the classroom, with the running line highlighted">
+        <p class="drawon__file">the-graphite-mind/longform/engine/kitlib/scenes.py</p>
+        <ol class="drawon__lines" tabindex="0"></ol>
+      </div>
+      <div class="drawon__art"></div>
+      <div class="drawon__bar">
+        <button class="btn drawon__play" type="button" aria-pressed="false">Play</button>
+        <input class="drawon__scrub" type="range" min="0" max="0" value="0" aria-label="Scrub through the build, one code step at a time">
+        <p class="drawon__status" aria-live="off">Every shape, in the order the code makes it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-ink on-ink" id="languages" aria-labelledby="h-langs">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="h-langs">One line, twelve languages.</h2>
+      <p>A moment from our first video, with the subtitle that is on screen in each language. Claude translates every line, then cuts the text into short cues that are easy to read.</p>
+    </div>
+    <div class="langs">
+      <figure class="langs__stage">
+        <img src="/assets/img/making/frame-langs.webp" srcset="/assets/img/making/frame-langs-640.webp 640w, /assets/img/making/frame-langs.webp 1280w" sizes="(min-width: 1000px) 52rem, 100vw" width="1280" height="720" loading="lazy" decoding="async" alt="A frame from the video: a boy walks uphill through snow to school, and uphill again on the way back home.">
+        <p class="langs__big" lang="en">Uphill. Both ways.</p>
       </figure>
-      <figure class="stage">
-        <img src="/assets/img/cast/zee.webp" width="552" height="900" alt="Zee, in a yellow hoodie and jeans, drawn by the code on the left." loading="lazy" decoding="async" style="max-height:24rem;width:auto">
-      </figure>
+      <div class="langs__tabs" role="tablist" aria-label="Subtitle language">
+        <button class="langs__tab" role="tab" type="button" data-lang="en" data-line="Uphill. Both ways.">English</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="es" data-line="Ida y vuelta.">Español</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="pt-BR" data-line="Na ida e na volta.">Português</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="fr" data-line="Dans les deux sens.">Français</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="de" data-line="In beide Richtungen.">Deutsch</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="ja" data-line="行きも帰りもだ。">日本語</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="hi" data-line="आना भी, जाना भी।">हिन्दी</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="ar" data-dir="rtl" data-line="ذهابًا وإيابًا.">العربية</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="ru" data-line="В обе стороны.">Русский</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="vi" data-line="Cả lúc đi lẫn lúc về.">Tiếng Việt</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="zh-Hans" data-line="来回都是上坡。">简体中文</button>
+        <button class="langs__tab" role="tab" type="button" data-lang="zh-Hant" data-line="去程回程都是上坡。">繁體中文</button>
+      </div>
     </div>
   </div>
 </section>
@@ -221,17 +296,6 @@
     </div>
   </div>
 </section>
-
-<section class="section band-2" aria-labelledby="h-why">
-  <div class="wrap split">
-    <div class="split__head"><h2 id="h-why">Why do it this way?</h2></div>
-    <div class="split__body prose">
-      <p>No stock footage and no borrowed art, so there is no copyright risk from the pictures. Every drawing is ours, so we can reuse it and change it.</p>
-      <p>And because the drawings are code, a character improved once can be reused as improved in the next video. Every video since the first one, in September 2026, was made this way and rendered on one MacBook Air.</p>
-      <p style="margin-top:1.5rem"><a class="link-plain" href="/cast.html">Meet the characters</a></p>
-    </div>
-  </div>
-</section>
 </main>
 <footer class="site-footer">
   <div class="wrap">
@@ -248,13 +312,15 @@
           <li><a href="/press.html">Press kit</a></li>
           <li><a href="/privacy.html">Privacy</a></li>
           <li><a href="https://www.youtube.com/@TheGraphiteMind">YouTube</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61594804304042">Facebook</a></li>
         </ul>
-        <p class="footer-small" style="margin-top:1.5rem">&copy; 2026 The Graphite Mind. Contact: <a href="mailto:hello@thegraphitemind.com">hello@thegraphitemind.com</a></p>
+        <p class="footer-small" style="margin-top:1.5rem">&copy; 2026 The Graphite Mind. Contact: <a href="mailto:henry@thegraphitemind.com">henry@thegraphitemind.com</a></p>
         <p class="footer-small" style="margin-top:0.5rem">Voices in our videos are AI voices made with ElevenLabs. Maps use Natural Earth data.</p>
       </div>
     </div>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>
+<script src="/assets/js/v3.js" defer></script>
 </body>
 </html>
